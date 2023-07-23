@@ -3,14 +3,14 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
 
-class Post (models.Model):
+class Article(models.Model):
 
     class PublishedManager(models.Manager):
         def get_queryset(self):
             return super().get_queryset().filter(status='published')
         
     all_articles = models.Manager()
-    published_manager = PublishedManager() 
+    published_articles = PublishedManager() 
     
     options = (
     ('draft', 'Draft'),
@@ -29,7 +29,7 @@ class Post (models.Model):
         ordering = ('-published_date',)
 
     def get_absolute_url(self):
-        return reverse('blog:post_single',args=[self.slug])
+        return reverse('blog:single_article',args=[self.slug])
 
     def __str__(self):
         return self.title

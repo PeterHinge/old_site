@@ -1,14 +1,14 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Post
+from .models import Article
 
 def home(request):
 
-    published_posts = Post.published_manager.all()
+    published_articles = Article.published_articles.all()
 
-    return render(request, 'home.html', {'posts' : published_posts})
+    return render(request, 'home.html', {'articles' : published_articles})
 
-def single_article(request, post):
+def single_article(request, article):
 
-    post = get_object_or_404(Post, slug=post, status='published')
+    article = get_object_or_404(Article, slug=article, status='published')
 
-    return render(request, 'article.html', {'post' : post})
+    return render(request, 'article.html', {'article' : article})
