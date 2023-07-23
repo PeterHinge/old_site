@@ -1,2 +1,2 @@
 # mysite
-My private site
+My private site for everything
