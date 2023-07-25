@@ -6,12 +6,12 @@ from django.views.generic import ListView
 
 class CategoryListView(ListView):
     template_name = 'category.html'
-    context_object_name = 'catlist'
+    context_object_name = 'category_list'
 
     def get_queryset(self):
         content = {
             'category': self.kwargs['category'],
-            'cat_articles': Article.all_articles.filter(category__name=self.kwargs['category']).filter(status='published')
+            'cat_articles': Article.published_articles.filter(category__name=self.kwargs['category'])
         }
         return content
 
@@ -22,7 +22,7 @@ def home(request):
     return render(request, 'home.html', {'articles' : published_articles})
 
 def category_list(request):
-    category_list = Category.all_articles.exclude(name='all')
+    category_list = Category.objects.exclude(name='all')
     context = {
         "category_list": category_list,
     }
