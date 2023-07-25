@@ -1,18 +1,18 @@
 {% extends "main.html" %}
 
     {% block title %}
-    Welcome to Blog
+    {{category_list.category}} articles
     {% endblock %}
 
     {% block content %}
     
-
-   <div class="album py-5 bg-light">
+       <div class="album py-5 bg-light">
         <div class="container">
           <div class="row">
 
-
-        {% for article in articles %}
+        <div class="col-12 pb-5"><h1> List of {{category_list.category}} articles</h1></div>
+        
+        {% for article in category_list.all_articles %}
             <div class="col-md-4">
             <a class="text-dark" href="{{article.get_absolute_url}}">
               <div class="card mb-4 box-shadow">
@@ -28,11 +28,8 @@
               </a>
             </div>
         {% endfor %}
-
-
           </div>
         </div>
       </div>
-
 
     {% endblock %}

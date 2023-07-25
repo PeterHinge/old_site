@@ -1,12 +1,17 @@
 from django.contrib import admin
-from .models import Article, Comment
+from .models import Article, Comment, Category
+
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'key_words')
 
 
 @admin.register(Article)
 class AuthorAdmin(admin.ModelAdmin):
-    list_display = ('title', 'status', 'slug', 'author')
+    list_display = ('title', 'status', 'category', 'author', 'slug')
     prepopulated_fields = {'slug': ('title',), }
-
+    search_fields = ('title', 'status')
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
